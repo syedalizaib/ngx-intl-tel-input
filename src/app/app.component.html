@@ -1,0 +1,54 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="margin: 50px">
+	<h1>Test International Telephone Input Form</h1>
+	<br>
+	<div class="wrapper">
+		<input type="checkbox"
+			[(ngModel)]="separateDialCode">
+		<label>&nbsp;Separate Dial Code?</label>
+	</div>
+	<form #f="ngForm"
+		[formGroup]="phoneForm">
+		<div class="wrapper">
+			<ngx-intl-tel-input 
+				[cssClass]="'custom'"
+				customPlaceholder="+000 000 0000"
+				name="phone"
+				formControlName="phone"
+				searchCountryPlaceholder="Search by Country Name or Code"
+				[phoneValidation]="true"
+				[enableAutoCountrySelect]="true"
+				[enablePlaceholder]="true"
+				[separateDialCode]="separateDialCode"
+				[searchCountryFlag]="true"
+				[selectFirstCountry]="false"
+				[maxLength]="15"
+				[searchCountryField]="[
+				SearchCountryField.Iso2,
+				SearchCountryField.Name,
+				SearchCountryField.DialCode
+				]"
+				[selectedCountryISO]="CountryISO.UnitedStates"
+				[numberFormat]="PhoneNumberFormat.National"></ngx-intl-tel-input>
+		</div>
+		<div class="wrapper">
+			<button (click)="f.reset()">Reset</button>
+		</div>
+	</form>
+	<br>
+	<div><strong>Is input valid:</strong>
+		<pre>{{ !f.form.controls['phone'].invalid }}</pre>
+	</div>
+	<div><strong>Is input touched:</strong>
+		<pre>{{ f.form.controls['phone'].touched }}</pre>
+	</div>
+	<div><strong>Is form valid:</strong>
+		<pre>{{ f.form.valid }}</pre>
+	</div>
+	<div><strong>Form value:</strong>
+		<pre>{{ f.form.value | json }}</pre>
+	</div>
+	<div><strong>Form validation errors:</strong>
+		<pre>{{ f.form.controls['phone'].errors | json }}</pre>
+	</div>
+</div>
